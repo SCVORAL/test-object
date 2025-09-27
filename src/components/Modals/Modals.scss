@@ -1,0 +1,135 @@
+.modal__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  &--enter {
+    animation: fadeIn 0.2s forwards;
+  }
+  &--leave {
+    animation: fadeOut 0.2s forwards;
+  }
+}
+
+.modal__content {
+  font-family: "Roboto", sans-serif;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: #fff;
+  border-radius: 8px;
+  min-width: 300px;
+  max-width: 90%;
+  max-height: 90%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  overflow: auto;
+
+  &--enter {
+    animation: scaleIn 0.2s forwards;
+  }
+  &--leave {
+    animation: scaleOut 0.2s forwards;
+  }
+}
+
+.modal__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px;
+  color: var(--color-purple);
+}
+
+.modal__close {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+
+.confirm-modal__content {
+  background: rgba(255, 236, 234, 1);
+}
+
+.confirm-modal__body {
+  box-sizing: border-box;
+  width: 312px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 26px;
+}
+
+.confirm-modal__title {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.confirm-modal__text {
+  font-size: 14px;
+  color: rgba(74, 69, 78, 1);
+}
+
+.confirm-modal__buttons {
+  margin-top: 24px;
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+
+  .button {
+    font-weight: 500;
+  }
+}
+
+.confirm-modal__button-leave {
+  background: rgba(186, 26, 26, 1);
+  border-radius: 20px;
+}
+
+.confirm-modal__button-cancel {
+  background: none;
+  color: rgba(30, 26, 32, 1);
+}

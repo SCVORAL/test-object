@@ -1,0 +1,38 @@
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+
+  input {
+    display: none;
+  }
+
+  &__box {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #4a454e;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    transition: all 0.2s;
+    margin-right: 8px;
+
+    img {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  input:checked + &__box {
+    background-color: var(--color-purple);
+    border-color: var(--color-purple);
+  }
+
+  &__label {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}

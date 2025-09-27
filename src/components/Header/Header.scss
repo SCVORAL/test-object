@@ -1,0 +1,40 @@
+.header {
+  width: 100%;
+  background-color: var(--color-white);
+  padding: 20px 0;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &-link {
+      text-decoration: none;
+      color: var(--color-secondary);
+      padding: 8px 16px;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &.active {
+        border-color: var(--color-secondary);
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__icons {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+}

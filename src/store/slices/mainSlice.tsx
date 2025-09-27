@@ -1,0 +1,26 @@
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+
+interface MainState {
+  value: number;
+}
+
+const initialState: MainState = { value: 0 };
+
+export const mainSlice = createSlice({
+  name: "main",
+  initialState,
+  reducers: {
+    increment: (state) => {
+      state.value += 1;
+    },
+    decrement: (state) => {
+      state.value -= 1;
+    },
+    setValue: (state, action: PayloadAction<number>) => {
+      state.value = action.payload;
+    },
+  },
+});
+
+export const { increment, decrement, setValue } = mainSlice.actions;
+export default mainSlice.reducer;

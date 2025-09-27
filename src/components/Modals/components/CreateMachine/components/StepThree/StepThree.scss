@@ -1,0 +1,21 @@
+.step-three {
+  margin-top: 32px;
+  background: #fff7ff;
+  border-radius: 8px;
+  padding: 24px;
+
+  &__item {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(204, 196, 206, 0.3);
+
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+  &__name {
+    font-size: 14px;
+    color: #4a454e;
+    width: 60px;
+  }
+}
