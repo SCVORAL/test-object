@@ -1,11 +1,9 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import mainReducer from "./slices/mainSlice";
 import serversReducer from "./slices/serversSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import createIdbStorage from "@piotr-cz/redux-persist-idb-storage";
 
 const rootReducer = combineReducers({
-  main: mainReducer,
   servers: serversReducer,
 });
 

@@ -1,5 +1,5 @@
 import "./CustomCheckbox.scss";
-import CheckIcon from "../../assets/img/complete-step.svg";
+import images from "../../assets/img";
 
 interface CustomCheckboxProps {
   checked: boolean;
@@ -20,7 +20,7 @@ export const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
         onChange={() => onChange(!checked)}
       />
       <span className="custom-checkbox__box">
-        {checked && <img src={CheckIcon} alt="check" />}
+        {checked && <img src={images.completeStep} alt="check" />}
       </span>
       {label && <span className="custom-checkbox__label">{label}</span>}
     </label>

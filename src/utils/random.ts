@@ -1,10 +1,16 @@
 const statesAlerts = ["important", "critical", "moderate", "all good"] as const;
+export type AlertType = (typeof statesAlerts)[number];
+
+export interface Alert {
+  type: AlertType;
+  count?: number;
+}
 
 export function generateRandomStatus(): "Running" | "Stopped" {
   return Math.random() < 0.7 ? "Running" : "Stopped";
 }
 
-export function generateRandomState() {
+export function generateRandomState(): Alert {
   const type = statesAlerts[Math.floor(Math.random() * statesAlerts.length)];
   if (type !== "all good") {
     return {
@@ -15,7 +21,7 @@ export function generateRandomState() {
   return { type };
 }
 
-export function generateRandomId() {
+export function generateRandomId(): string {
   const part1 = Math.floor(Math.random() * 100000)
     .toString(16)
     .toUpperCase()
@@ -26,7 +32,7 @@ export function generateRandomId() {
   return `${part1}-${part2}`;
 }
 
-export function generateRandomRuntime() {
+export function generateRandomRuntime(): string {
   const maxSecondsInMonth = 30 * 24 * 60 * 60;
   const totalSeconds = Math.floor(Math.random() * maxSecondsInMonth);
 
@@ -38,13 +44,18 @@ export function generateRandomRuntime() {
   return `${days}:${hours}:${minutes}:${seconds}`;
 }
 
-export function getRandomPositiveFloat(max: number) {
+export function getRandomPositiveFloat(max: number): number {
   const num = Math.random() * max;
   return parseFloat(num.toFixed(2)) || 0.01;
 }
 
-export const generateTrafficData = (days: number) => {
-  const data = [];
+export interface TrafficData {
+  date: string;
+  TB: number;
+}
+
+export const generateTrafficData = (days: number): TrafficData[] => {
+  const data: TrafficData[] = [];
   const today = new Date();
 
   for (let i = days - 1; i >= 0; i--) {

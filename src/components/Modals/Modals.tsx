@@ -1,8 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import "./Modals.scss";
-import { useEffect, useState } from "react";
-import closeImg from "../../assets/img/close.svg";
-import errorImg from "../../assets/img/error.svg";
+import { useCallback, useEffect, useState } from "react";
+import img from "../../assets/img";
 
 interface ModalProps {
   open: boolean;
@@ -22,13 +21,16 @@ export const Modal: React.FC<ModalProps> = ({
   const [isVisible, setIsVisible] = useState(open);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  const handleClose = (val?: boolean) => {
-    if (!val && needConfirmClose) {
-      setConfirmOpen(true);
-    } else {
-      onOpenChange(false);
-    }
-  };
+  const handleClose = useCallback(
+    (val?: boolean) => {
+      if (!val && needConfirmClose) {
+        setConfirmOpen(true);
+      } else {
+        onOpenChange(false);
+      }
+    },
+    [needConfirmClose, onOpenChange]
+  );
 
   useEffect(() => {
     if (open) {
@@ -58,7 +60,7 @@ export const Modal: React.FC<ModalProps> = ({
             {title}
             <img
               className="modal__close"
-              src={closeImg}
+              src={img.close}
               alt=""
               onClick={() => handleClose()}
             />
@@ -68,13 +70,12 @@ export const Modal: React.FC<ModalProps> = ({
         </Dialog.Content>
       </Dialog.Root>
 
-      {/* модалка подтверждения */}
       <Dialog.Root open={confirmOpen} onOpenChange={setConfirmOpen}>
         <Dialog.Portal>
           <Dialog.Overlay className="modal__overlay" />
           <Dialog.Content className="confirm-modal__content modal__content">
             <div className="confirm-modal__body modal__body">
-              <img src={errorImg} alt="" width={20} />
+              <img src={img.error} alt="" width={20} />
               <span className="confirm-modal__title">Cancel creating?</span>
               <span className="confirm-modal__text">
                 You have unsaved changes that will be lost. Do you want to

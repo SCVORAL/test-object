@@ -19,7 +19,17 @@ const MemorySlider: React.FC<MemorySliderProps> = ({
   setValue,
 }) => {
   return (
-    <div className="memory-slider">
+    <div
+      className="memory-slider"
+      style={
+        {
+          "--first-end": `${(firstEnd / max) * 100}%`,
+          "--second-end": `${(secondEnd / max) * 100}%`,
+          "--divider-left": `${(firstEnd / max) * 100}%`,
+          "--divider-width": `${((secondEnd - firstEnd) / (max - min)) * 100}%`,
+        } as React.CSSProperties
+      }
+    >
       <Slider.Root
         value={value}
         onValueChange={setValue}
@@ -42,13 +52,7 @@ const MemorySlider: React.FC<MemorySliderProps> = ({
             style={{ flex: max - secondEnd }}
           />
 
-          <div
-            className="memory-slider__divider"
-            style={{
-              left: `${(firstEnd / max) * 100}%`,
-              width: `${((secondEnd - firstEnd) / (max - min)) * 100}%`,
-            }}
-          />
+          <div className="memory-slider__divider" />
         </Slider.Track>
 
         <Slider.Thumb className="memory-slider__thumb">
@@ -58,15 +62,7 @@ const MemorySlider: React.FC<MemorySliderProps> = ({
         </Slider.Thumb>
       </Slider.Root>
 
-      <div
-        className="memory-slider__labels"
-        style={
-          {
-            "--first-end": `${(firstEnd / max) * 100}%`,
-            "--second-end": `${(secondEnd / max) * 100}%`,
-          } as React.CSSProperties
-        }
-      >
+      <div className="memory-slider__labels">
         <span className="memory-slider__label memory-slider__label--min">
           {min} GB
         </span>

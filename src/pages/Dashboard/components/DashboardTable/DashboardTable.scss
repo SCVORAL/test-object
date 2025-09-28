@@ -18,33 +18,33 @@
     }
   }
 
-  &__cell--state {
+  &__cell-head {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  &__cell-state {
     display: inline-block;
     padding: 4px 8px;
     border-radius: 100px;
 
-    &_running {
+    &--running {
       color: var(--color-positive);
       background-color: #f4f9f6;
     }
-    &_stopped {
+    &--stopped {
       color: var(--color-negative);
       background-color: #fef5f6;
     }
   }
 
-  &__cell--type {
+  &__cell-type {
     display: flex;
     gap: 4px;
     align-items: center;
   }
 
-  &__cell--head {
-    font-size: 12px;
-    font-weight: 400;
-  }
-
-  &__cell--sortable {
+  &__cell-sortable {
     cursor: pointer;
     user-select: none;
   }

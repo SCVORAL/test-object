@@ -43,7 +43,7 @@ const StepTwo: React.FC<StepTwoProps> = ({
   }, [dataServer.cpu.used, dataServer.memory.used, setBtnValidate, hasError]);
 
   return (
-    <div className="step-one">
+    <div className="step-two">
       <InputField
         value={dataServer.cpu.used.toString()}
         onChange={(e) =>

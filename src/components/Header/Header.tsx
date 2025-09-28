@@ -1,6 +1,5 @@
-import imgNotifications from "../../assets/img/notifications.svg";
 import imgAvatar from "../../assets/img/avatar.png";
-import imgLogo from "../../assets/img/logo.svg";
+import images from "../../assets/img";
 import "./Header.scss";
 import { NavLink } from "react-router-dom";
 
@@ -9,7 +8,7 @@ const Header = () => {
     <header className="header">
       <div className="header__container container">
         <div className="header__logo">
-          <img src={imgLogo} width="80" height="26" alt="avatar" />
+          <img src={images.logo} width="80" height="26" alt="avatar" />
         </div>
 
         <nav className="header__menu">
@@ -42,7 +41,7 @@ const Header = () => {
         <div className="header__icons">
           <NavLink to="/notifications">
             <img
-              src={imgNotifications}
+              src={images.notifications}
               width={24}
               height={24}
               alt="notification"

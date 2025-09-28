@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import modalBgImg from "../../../../assets/img/modal-bg.svg";
+import images from "../../../../assets/img";
 import "./CreateMachine.scss";
 import classNames from "classnames";
 import type { Server } from "../../../../store/types/serversTypes";
@@ -7,13 +7,9 @@ import { addServer } from "../../../../store/slices/serversSlice";
 import { useAppDispatch } from "../../../../store/hooks/useAppDispatch";
 import { createNewServer } from "../../../../utils/serverGenerators";
 import { useSteps } from "./components/useSteps";
+import type { InjectedProps } from "../../../../HOC/modalHOC";
 
-interface CreateMachineProps {
-  setNeedConfirmClose: React.Dispatch<React.SetStateAction<boolean>>;
-  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const CreateMachine: React.FC<CreateMachineProps> = ({
+const CreateMachine: React.FC<InjectedProps> = ({
   setNeedConfirmClose,
   onOpenChange,
 }) => {
@@ -61,7 +57,7 @@ const CreateMachine: React.FC<CreateMachineProps> = ({
   return (
     <div className="create-machine">
       <div className="left">
-        <img className="left__bg" src={modalBgImg} alt="" />
+        <img className="left__bg" src={images.modalBg} alt="" />
         <div className="left__info">
           <div className="cleft__subtitle">Welcome to the</div>
           <div className="left__title">New Virtual Machine Wizard</div>
@@ -69,6 +65,7 @@ const CreateMachine: React.FC<CreateMachineProps> = ({
           <div className="left__steps">
             {steps.map((i) => (
               <div
+                key={i.id}
                 className={classNames("left__step", {
                   "left__step--active": i.id === currentStep,
                   "left__step--completed": i.id < currentStep,

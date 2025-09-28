@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import "./InputField.scss";
-import errorIcon from "../../assets/img/error.svg";
-import arrowIcon from "../../assets/img/input-arrow.svg";
-import { useEffect, useState } from "react";
+import images from "../../assets/img";
+import { useEffect } from "react";
 
 interface InputFieldProps {
   value: string;
@@ -27,15 +26,9 @@ export const InputField: React.FC<InputFieldProps> = ({
   type,
   setHasError,
 }) => {
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    if (type === "number" ? Number(value) > max : value.length > max) {
-      setError(true);
-    } else {
-      setError(false);
-    }
-  }, [max, value, type]);
+  const error = type === "number" ? Number(value) > max : value.length > max;
+  const hasValue =
+    type === "number" ? value !== "" && value !== "0" : value.length > 0;
 
   useEffect(() => {
     setHasError?.(error);
@@ -52,13 +45,12 @@ export const InputField: React.FC<InputFieldProps> = ({
     }
   };
 
-  const handleIncrement = () => onChange(Math.max(0, Number(value) + 1));
-
-  const handleDecrement = () => onChange(Math.max(0, Number(value) - 1));
+  const changeValue = (delta: number) =>
+    onChange(Math.max(0, Math.min(Number(value) + delta, max)));
 
   return (
-    <label className="input-field">
-      <div
+    <div className="input-field">
+      <label
         className={classNames("input-field__wrapper", {
           "input-field__wrapper--error": !!error,
         })}
@@ -71,12 +63,12 @@ export const InputField: React.FC<InputFieldProps> = ({
           className="input-field__input"
           style={{
             width:
-              type === "number" && value !== "0"
+              type === "number" && hasValue
                 ? `${value?.toString().length + 1}ch`
                 : undefined,
           }}
         />
-        {value !== "0" && (
+        {hasValue && (
           <span
             className={classNames("input-field__placeholder", {
               "input-field__placeholder--error": !!error,
@@ -86,33 +78,38 @@ export const InputField: React.FC<InputFieldProps> = ({
           </span>
         )}
 
-        {type === "number" && value !== "0" && (
+        {type === "number" && hasValue && (
           <span className="input-field__counter">/ {max}</span>
         )}
 
-        {suffix && value !== "0" && (
+        {suffix && hasValue && (
           <span className="input-field__suffix">{suffix}</span>
         )}
 
-        {error && errorIcon && (
-          <img src={errorIcon} alt="error" className="input-field__icon" />
+        {error && (
+          <img src={images.error} alt="error" className="input-field__icon" />
         )}
 
         {type === "number" && !error && (
-          <div className="input-field_arrows">
-            <div className="input-field_arrow" onClick={handleIncrement}>
-              <img src={arrowIcon} alt="" />
+          <div className="input-field__arrows">
+            <div
+              className={classNames("input-field__arrow", {
+                "input-field__arrow--disable": Number(value) === max,
+              })}
+              onClick={() => changeValue(+1)}
+            >
+              <img src={images.inputArrow} alt="" />
             </div>
-            <div className="input-field_arrow" onClick={handleDecrement}>
-              <img src={arrowIcon} alt="" />
+            <div className="input-field__arrow" onClick={() => changeValue(-1)}>
+              <img src={images.inputArrow} alt="" />
             </div>
           </div>
         )}
-      </div>
+      </label>
 
       {hint && !error && <p className="input-field__hint-text">{hint}</p>}
       {error && <p className="input-field__error-text">{errorText}</p>}
-    </label>
+    </div>
   );
 };
 

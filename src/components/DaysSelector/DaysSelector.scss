@@ -5,12 +5,9 @@
 
   &__toggle {
     padding: 8px 12px;
-    // border: 1px solid #ccc;
-    // border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    // width: 120px;
     user-select: none;
   }
 
@@ -25,7 +22,7 @@
     transition: transform 0.2s ease;
 
     &--open {
-      transform: rotate(180deg); // вращение при открытии
+      transform: rotate(180deg);
     }
 
     img,

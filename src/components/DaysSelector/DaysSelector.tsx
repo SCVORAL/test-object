@@ -1,5 +1,5 @@
 import { useState } from "react";
-import arrow from "../../assets/img/arrow.svg";
+import img from "../../assets/img";
 import "./DaysSelector.scss";
 
 interface DaysSelectorProps {
@@ -24,7 +24,7 @@ const DaysSelector: React.FC<DaysSelectorProps> = ({
             open ? "days-selector__icon--open" : ""
           }`}
         >
-          <img src={arrow} />
+          <img src={img.arrow} />
         </span>
       </div>
 
