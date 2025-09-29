@@ -9,7 +9,7 @@ interface StepOneProps {
   setBtnValidate: (data: boolean) => void;
 }
 
-const LIMIT_NAME = 20;
+const LIMIT_NAME = 80;
 
 const StepOne: React.FC<StepOneProps> = ({
   dataServer,

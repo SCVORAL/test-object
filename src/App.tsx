@@ -5,14 +5,12 @@ import Initializer from "./components/Initializer";
 
 function App() {
   return (
-    <div>
-      <Initializer />
-
+    <Initializer>
       <Header />
       <main>
         <Outlet />
       </main>
-    </div>
+    </Initializer>
   );
 }
 

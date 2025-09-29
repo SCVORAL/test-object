@@ -13,9 +13,11 @@
       padding-top: 0;
     }
   }
+
   &__name {
     font-size: 14px;
     color: #4a454e;
-    width: 60px;
+    width: 80px;
+    flex-shrink: 0;
   }
 }

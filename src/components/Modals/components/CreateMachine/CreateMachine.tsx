@@ -7,13 +7,14 @@ import { addServer } from "../../../../store/slices/serversSlice";
 import { useAppDispatch } from "../../../../store/hooks/useAppDispatch";
 import { createNewServer } from "../../../../utils/serverGenerators";
 import { useSteps } from "./components/useSteps";
-import type { InjectedProps } from "../../../../HOC/modalHOC";
+import {
+  useWithConfirmModalContext,
+  type InjectedProps,
+} from "../../../../HOC/withConfirmClouseModal";
 
-const CreateMachine: React.FC<InjectedProps> = ({
-  setNeedConfirmClose,
-  onOpenChange,
-}) => {
+const CreateMachine: React.FC<InjectedProps> = ({ onOpenChange }) => {
   const dispatch = useAppDispatch();
+  const { setNeedConfirmClose } = useWithConfirmModalContext();
 
   const [currentStep, setCurrentStep] = useState(1);
   const [dataServer, setDataServer] = useState<Server>({

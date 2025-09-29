@@ -2,13 +2,14 @@ import * as Dialog from "@radix-ui/react-dialog";
 import "./Modals.scss";
 import { useCallback, useEffect, useState } from "react";
 import img from "../../assets/img";
+import { createPortal } from "react-dom";
+import { useWithConfirmModalContext } from "../../HOC/withConfirmClouseModal";
 
 interface ModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title?: string;
   children: React.ReactNode;
-  needConfirmClose?: boolean;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -16,10 +17,9 @@ export const Modal: React.FC<ModalProps> = ({
   onOpenChange,
   title,
   children,
-  needConfirmClose,
 }) => {
   const [isVisible, setIsVisible] = useState(open);
-  const [confirmOpen, setConfirmOpen] = useState(false);
+  const { needConfirmClose, setConfirmOpen } = useWithConfirmModalContext();
 
   const handleClose = useCallback(
     (val?: boolean) => {
@@ -29,7 +29,7 @@ export const Modal: React.FC<ModalProps> = ({
         onOpenChange(false);
       }
     },
-    [needConfirmClose, onOpenChange]
+    [needConfirmClose, onOpenChange, setConfirmOpen]
   );
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export const Modal: React.FC<ModalProps> = ({
 
   if (!isVisible) return null;
 
-  return (
+  return createPortal(
     <>
       <Dialog.Root open={open} onOpenChange={(val) => handleClose(val)}>
         <Dialog.Overlay
@@ -62,47 +62,15 @@ export const Modal: React.FC<ModalProps> = ({
               className="modal__close"
               src={img.close}
               alt=""
-              onClick={() => handleClose()}
+              onClick={() => handleClose(false)}
             />
           </Dialog.Title>
 
           <div className="modal__body">{children}</div>
         </Dialog.Content>
       </Dialog.Root>
-
-      <Dialog.Root open={confirmOpen} onOpenChange={setConfirmOpen}>
-        <Dialog.Portal>
-          <Dialog.Overlay className="modal__overlay" />
-          <Dialog.Content className="confirm-modal__content modal__content">
-            <div className="confirm-modal__body modal__body">
-              <img src={img.error} alt="" width={20} />
-              <span className="confirm-modal__title">Cancel creating?</span>
-              <span className="confirm-modal__text">
-                You have unsaved changes that will be lost. Do you want to
-                continue?
-              </span>
-              <div className="confirm-modal__buttons">
-                <button
-                  onClick={() => {
-                    setConfirmOpen(false);
-                    onOpenChange(false);
-                  }}
-                  className="confirm-modal__button-leave button-reset button"
-                >
-                  Leave
-                </button>
-                <button
-                  onClick={() => setConfirmOpen(false)}
-                  className="confirm-modal__button-cancel button-reset button"
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
-    </>
+    </>,
+    document.body
   );
 };
 

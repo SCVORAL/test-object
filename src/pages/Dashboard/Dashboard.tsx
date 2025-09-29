@@ -4,12 +4,12 @@ import "./Dashboard.scss";
 import DashboardTable from "./components/DashboardTable";
 import images from "../../assets/img";
 import CreateMachine from "../../components/Modals/components/CreateMachine";
-import withModal from "../../HOC/modalHOC";
+import withConfirmClouseModal from "../../HOC/withConfirmClouseModal";
 import type { Server } from "../../store/types/serversTypes";
 import DashboardState from "./components/DashboardState";
 import DashboardTrend from "./components/DashboardTrend";
 
-const CreateMachineModal = withModal(CreateMachine);
+const CreateMachineModal = withConfirmClouseModal(CreateMachine);
 
 const Dashboard: React.FC = () => {
   const servers: Server[] = useAppSelector((state) => state.servers.list);

@@ -1,0 +1,47 @@
+.confirm-modal {
+  &__content {
+    background: rgba(255, 236, 234, 1);
+  }
+
+  &__body {
+    box-sizing: border-box;
+    width: 312px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 26px;
+  }
+
+  &__title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  &__text {
+    font-size: 14px;
+    color: rgba(74, 69, 78, 1);
+  }
+
+  &__buttons {
+    margin-top: 24px;
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+
+    .button {
+      font-weight: 500;
+    }
+  }
+
+  &__button-leave {
+    background: rgba(186, 26, 26, 1);
+    border-radius: 20px;
+  }
+
+  &__button-cancel {
+    background: none;
+    color: rgba(30, 26, 32, 1);
+  }
+}
